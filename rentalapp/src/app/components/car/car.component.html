@@ -1,0 +1,20 @@
+<div *ngIf="carDataLoaded==false"  class="spinner-border text-success" role="status">
+  <span class="sr-only"></span>
+</div>
+
+<table *ngIf="carDataLoaded ==true" class = "table">
+    <thead>
+        <tr>    
+            <th scope="col">Car Name</th>
+            <th scope="col">Brand Name</th>
+            <th scope="col">Color Name</th>
+            <th scope="col">Daily Price</th>
+        </tr>
+    </thead>
+    <tr *ngFor = "let car of cars">
+        <td>{{car.carName}}</td>
+        <td>{{car.brandName}}</td>
+        <td>{{car.colorName}}</td>
+        <td>{{car.dailyPrice}}</td>     
+    </tr>
+</table>
