@@ -1,12 +1,17 @@
-<table class="table">
-    <thead>
-        <tr>            
-            <th scope="col">Brand Id</th>
-            <th scope="col">Brand Name</th>
-        </tr>
-    </thead>
-    <tr *ngFor="let brand of brands">
-        <td>{{brand.id}}</td>
-        <td>{{brand.brandName}}</td>
-    </tr>
-</table>
+<ul class="list-group">
+    <li (click)="setAllBrands()" 
+    [class]=getAllBrandsClass() 
+    routerLink="/brands">
+        All Brands
+    </li>    
+    <li (click)="setCurrentBrand(brand)" 
+    routerLink="/cars/brand/{{brand.id}}"
+    *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)">
+        {{brand.brandName}}
+    </li>
+</ul>
+
+<h5 *ngIf ="currentBrand">{{currentBrand.brandName}} was selected</h5>
+<h5 *ngIf="!currentBrand">All brands was selected</h5>
+
+

@@ -1,16 +1,13 @@
-    <div *ngIf="colorDataLoaded==false" class="spinner-border text-success" role="status">
-        <span class="sr-only"></span>
-    </div>
+    <ul class="list-group">
+        <li (click)="setAllColors()" [class]=getAllColorsClass() routerLink="/colors">
+            All Colors
+        </li>
+        <li (click)="setCurrentColor(color)" 
+        routerLink="/cars/color/{{color.id}}" *ngFor="let color of colors"
+        [class]="getCurrentColorClass(color)">
+            {{color.colorName}}
+        </li>
+    </ul>
 
-    <table *ngIf="colorDataLoaded ==true" class="table">
-        <thead>
-            <tr>
-                <th scope="col">Color Id</th>
-                <th scope="col">Color Name</th>
-            </tr>
-        </thead>
-        <tr *ngFor="let color of colors">
-            <td>{{color.id}}</td>
-            <td>{{color.colorName}}</td>
-        </tr>
-    </table>
+    <h5 *ngIf="currentColor">{{currentColor.colorName}} was selected</h5>
+    <h5 *ngIf="!currentColor">All colors was selected</h5>

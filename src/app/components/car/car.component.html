@@ -1,4 +1,4 @@
-<div *ngIf="carDataLoaded==false"  class="spinner-border text-success" role="status">
+<!-- <div *ngIf="carDataLoaded==false"  class="spinner-border text-success" role="status">
   <span class="sr-only"></span>
 </div>
 
@@ -18,3 +18,62 @@
         <td>{{car.dailyPrice}}</td>     
     </tr>
 </table>
+
+ -->
+
+
+
+
+    <div *ngIf="!carDataLoaded" class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+       
+    </div>
+    
+    
+    <div *ngIf="carDataLoaded"  class="container">
+    
+        <div class="row ">
+    
+            <div *ngFor="let carDetail of carDetails" class="col-md-4">
+                
+    
+                <img *ngIf="carDetail.imagePath" 
+                routerLink="/cars/cardetail/{{ carDetail.carId }}"
+
+                [src]="carDetail.imagePath.length != 0 
+                ? imageUrl+carDetail.imagePath[0] 
+                : imageUrl + 'default_img.jpg'"
+                style="object-fit: cover;" 
+                class="card-img-top" 
+                alt="...">
+    
+                <div class="card-body">
+    
+                    <h5 class="card-title">{{carDetail.brandName}} {{carDetail.modelName}}</h5>
+    
+    
+                </div>
+    
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Brand:{{carDetail.brandName}}</li>
+                    <li class="list-group-item">Model Name:{{carDetail.modelName}}</li>                    
+                    <li class="list-group-item">Color:{{carDetail.colorName}}</li>
+                    <li class="list-group-item">Price:{{carDetail.dailyPrice}} TL/Gün</li>                     
+
+                </ul>
+    
+                <div class="card-body">
+                    <button routerLink="/cars/cardetail/{{ carDetail.carId}}" type="button"
+                        class="btn btn-primary">Details</button>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+
+    <div *ngIf="emptyContent"  class="container">
+    
+        emptyContent
+    </div>
