@@ -17,7 +17,7 @@ export class CarService {
 
   
 
-  getCarDetails(): Observable<ListResponseModel<CarDetail>> {
+  getCars(): Observable<ListResponseModel<CarDetail>> {
     // which means the function returns; Observable<T> that a subscribable CarResponseModel
     let newPath = this.apiUrl+ "/cars/getallcardetails";
     
@@ -36,7 +36,7 @@ export class CarService {
 
   getCarsByBrand( brandId: number ): Observable<ListResponseModel<CarDetail>> {
     
-    let newPath = this.apiUrl + "/cars/getdetailsbybrand?brandId=" + brandId;
+    let newPath = this.apiUrl + "/cars/getdetailsbybrand?id=" + brandId;
     
     return this.httpClient.get<ListResponseModel<CarDetail>>( newPath );
     
@@ -46,17 +46,20 @@ export class CarService {
 
   getCarsByColor( colorId: number ): Observable<ListResponseModel<CarDetail>> {
     
-    let newPath = this.apiUrl + "/Cars/getdetailsbycolor?colorId=" + colorId;
+    let newPath = this.apiUrl + "/Cars/getdetailsbycolor?id=" + colorId;
     
     return this.httpClient.get<ListResponseModel<CarDetail>>( newPath );
 
   }
 
-  /*
-   getCarsByBrandAndColor(colorId:number,brandId:number):Observable<ListResponseModel<Car>>{
-    let newPath = this.apiUrl +"Cars/GetCarDetailsByColorAndByBrand?colorId="+colorId+ "&brandId=" +brandId;
-    return this.httpClient.get<ListResponseModel<Car>>(newPath)
+  
+   getCarsByBrandAndColor(colorId:number,brandId:number):Observable<ListResponseModel<CarDetail>>{
+    let newPath = this.apiUrl +"Cars/getdetailsbybrandandcolorid?brandId="+brandId+ "&colorId=" +colorId;
+    return this.httpClient.get<ListResponseModel<CarDetail>>(newPath)
   }
-  */
+  
+
+  
+
 }
 

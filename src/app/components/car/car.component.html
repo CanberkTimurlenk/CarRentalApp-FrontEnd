@@ -24,17 +24,23 @@
 
 
 
-    <div *ngIf="!carDataLoaded" class="spinner-border text-danger" role="status">
+    <div *ngIf="!carDataLoaded && emptyContent" class="spinner-border text-danger" role="status">
         <span class="visually-hidden">Loading...</span>
        
     </div>
     
     
-    <div *ngIf="carDataLoaded"  class="container">
+    <div *ngIf="carDataLoaded && !emptyContent"  class="container">
+
+        <div class="mb-3">
+            <label for="filterText" class="form-label"></label>
+            <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+                placeholder="search for car model">
+        </div>
     
         <div class="row ">
     
-            <div *ngFor="let carDetail of carDetails" class="col-md-4">
+            <div *ngFor="let carDetail of carDetails | carFilterPipe:filterText " class="col-md-4">
                 
     
                 <img *ngIf="carDetail.imagePath" 
@@ -74,6 +80,6 @@
     </div>
 
     <div *ngIf="emptyContent"  class="container">
-    
-        emptyContent
+    emptyContent
+        
     </div>

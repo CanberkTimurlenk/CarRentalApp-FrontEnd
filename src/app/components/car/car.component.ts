@@ -18,7 +18,7 @@ export class CarComponent implements OnInit {
   carDetails: CarDetail[]=[];
   carImage: CarImage[] = [];
   imageUrl: string = "https://localhost:44327/Uploads/images/carImages/" 
-
+  filterText : string = "";
   
   emptyContent: boolean = false;
   
@@ -36,6 +36,13 @@ export class CarComponent implements OnInit {
         
       }
 
+      else if ( params[ "brandId"] && params ["colorId"] ) {
+        this.getCarsByBrandAndColor( params["brandId"] , params["colorId"] )
+        
+      }
+      
+      
+
       else {
         this.getCars();
 
@@ -46,7 +53,7 @@ export class CarComponent implements OnInit {
 
   getCars() {
     
-    this.carService.getCarDetails().subscribe( response => {
+    this.carService.getCars().subscribe( response => {
       
       this.carDetails = response.data;
       this.carDataLoaded = true;
@@ -71,17 +78,39 @@ export class CarComponent implements OnInit {
     
     this.carService.getCarsByColor( colorId ).subscribe( response => {
       
-      if(response.data)
+      if(response.data) {
         this.carDetails = response.data;
+        this.emptyContent = false;
+      
+      }
       
       else { 
         this.emptyContent = true;
+        console.log( "emptyContent " );
         this.carDetails = null as any;
       }
-      console.log(this.carDetails)
+      
+      
+      //console.log( this.emptyContent );
       this.carDataLoaded = true;
+
+      
+    } )
+    
+    
+
+  }
+
+  getCarsByBrandAndColor(brandId : number , colorId: number):void {
+
+    this.carService.getCarsByBrandAndColor( brandId, colorId ).subscribe( response => {
+      
+      this.carDetails = response.data;
+      this.carDataLoaded = true;
+
 
     })
 
-  }
+
+    }
 }

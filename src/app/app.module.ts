@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 //import { CarouselModule } from '@/node_modules/carousel';
+import { FormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,9 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { CarComponent } from './components/car/car.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
+import { CarFilterPipePipe } from './pipes/carFilterPipe/car-filter-pipe.pipe';
+import { BrandFilterPipePipe } from './pipes/brandFilterPipe/brand-filter-pipe.pipe';
+import { ColorFilterPipePipe } from './pipes/colorFilterPipe/color-filter-pipe.pipe';
 
 
 
@@ -28,13 +32,17 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
     CustomerComponent,
     CarComponent,
     RentalComponent,
-    CarDetailComponent
+    CarDetailComponent,
+    CarFilterPipePipe,
+    BrandFilterPipePipe,
+    ColorFilterPipePipe
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
      
   ],
   providers: [],

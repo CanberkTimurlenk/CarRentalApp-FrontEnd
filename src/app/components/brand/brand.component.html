@@ -1,3 +1,10 @@
+<div class="mb-3">
+    <label for="filterText" class="form-label"></label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+        placeholder="search for brand">
+</div>
+
+
 <ul class="list-group">
     <li (click)="setAllBrands()" 
     [class]=getAllBrandsClass() 
@@ -6,10 +13,14 @@
     </li>    
     <li (click)="setCurrentBrand(brand)" 
     routerLink="/cars/brand/{{brand.id}}"
-    *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)">
-        {{brand.brandName}}
+    *ngFor="let brand of brands | brandFilterPipe:filterText " [class]="getCurrentBrandClass(brand) ">
+        {{brand.brandName}} 
     </li>
 </ul>
+
+<!-- <div *ngIf="filterText" class="alert alert-primary">
+    searched for {{filterText}}
+</div> -->
 
 <h5 *ngIf ="currentBrand">{{currentBrand.brandName}} was selected</h5>
 <h5 *ngIf="!currentBrand">All brands was selected</h5>
